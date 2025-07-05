@@ -1,4 +1,3 @@
-import { registerGetPermissionsTool } from "./tools/permissions.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { server } from "./mcp-server.js";
 import { registerGetHealthTool } from "./tools/health.js";
@@ -16,7 +15,6 @@ import { registerGetConfigurationsTool } from "./tools/configurations.js";
 import { registerGetVolumesTool } from "./tools/volumes.js";
 import { registerGetScannerTool } from "./tools/scanner.js";
 import { registerGetScannerMetadataTool } from "./tools/scannermetadata.js";
-import { registerGetJobLogTool } from "./tools/joblog.js";
 
 /**
  * The main function to initialize and run the MCP server.
@@ -37,8 +35,6 @@ async function main() {
   registerGetVolumesTool();
   registerGetScannerTool();
   registerGetScannerMetadataTool();
-  registerGetJobLogTool();
-  registerGetPermissionsTool();
   console.error("All tools registered.");
 
   // Connect the server to a transport
