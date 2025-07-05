@@ -129,3 +129,16 @@ For more details look at (CONTRIBUTING.md)[CONTRIBUTING.md]
 
 This is **not** an official Harbor MCP server.  
 It is experimental and under active development by the community.
+
+---
+
+## Project Links
+
+- [GitHub Repository](https://github.com/bupd/harbor-mcp-server)
+- [harbor-mcp on npm](https://www.npmjs.com/package/harbor-mcp)
+- [Docker Hub Image](https://hub.docker.com/r/bupd/harbor-mcp)
+- [Official Harbor Project](https://goharbor.io)
+
+---
+
+[![Hits](https://hits.sh/github.com/bupd/harbor-mcp-server.svg?label=views&extraCount=100&color=007ec6)](https://hits.sh/github.com/bupd/harbor-mcp-server/)
