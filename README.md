@@ -1,184 +1,101 @@
-# harbor-mcp-server
-mcp-server for harbor built by the community for the community 
+# harbor-mcp
 
-## Things taken from the weather server
-# MCP Weather Server
-
-A ready-to-use implementation of the Model Context Protocol (MCP) that extends Claude with real-time weather data capabilities.
-
-<!-- [![MCP Demo](https://img.youtube.com/vi/Y4bpWRLdRoA/0.jpg)](https://youtu.be/Y4bpWRLdRoA?si=TVuUyR79K_N-Zxoo) -->
+A Model Context Protocol (MCP) server for Harbor, enabling AI models and external tools to interact with a Harbor container registry in real time.
 
 ## What is MCP?
 
-Model Context Protocol (MCP) is an open communication framework that allows AI models like Claude to interact with external tools. This enables Claude to access real-time data, process files, and interact with external services - capabilities not available to most LLMs out of the box.
+Model Context Protocol (MCP) is an open communication framework that allows AI models (like Claude) to interact with external tools and APIs. This enables access to real-time data, process automation, and integration with external services.
 
 Learn more about MCP:
-- [MCP Official Documentation](https://modelcontextprotocol.io) <!-- Replace with actual link to Claude MCP docs -->
-- [Getting Started with MCP](https://modelcontextprotocol.io/quickstart/server) <!-- Replace with actual link to MCP getting started guide -->
-- [Postmans MCP Developer Community](https://discord.gg/kTnA7cpn) <!-- Replace with actual link to MCP community -->
+- [MCP Official Documentation](https://modelcontextprotocol.io)
+- [Getting Started with MCP](https://modelcontextprotocol.io/quickstart/server)
+- [Postmans MCP Developer Community](https://discord.gg/kTnA7cpn)
 
 ## What This Repository Contains
 
-This repository provides:
-
-1. **Complete MCP Weather Server**: A fully functional implementation that gives Claude access to real-time weather data
-3. **Template Code**: Use as a starting point for your own MCP projects
-4. **Configuration Examples**: Sample configuration files for connecting to Claude Desktop
+- **Complete MCP Server for Harbor**: A ready-to-use implementation that gives MCP clients access to Harbor registry data and management endpoints.
+- **Configuration Examples**: Sample configuration for connecting to Claude Desktop or other MCP clients.
 
 ## Features
 
-The MCP Weather Server implements two primary tools:
+The Harbor MCP Server implements the following tools:
+- Health and liveness checks for the Harbor instance
+- Project and repository listing
+- Storage quota reporting
+- Registry statistics
 
-- **get-forecast**: Retrieve current weather conditions and forecasts for any location by latitude/longitude
-- **get-alerts**: Check for active weather alerts in any US state
-
-Once connected, Claude can:
-- Answer questions about current weather conditions
-- Provide detailed weather forecasts
-- Alert users to severe weather warnings
-- Make recommendations based on weather data
-
-## Quick Start
+## Installation
 
 ### Prerequisites
-
 - Node.js 16+ and npm
-- [Claude Desktop](#) <!-- Replace with actual link to Claude Desktop download page -->
-- Basic knowledge of TypeScript/JavaScript
+- Access to a Harbor instance
 
-### Installation
-
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/bupd/harbor-mcp-server.git
-   cd mcp-weather-server
-   ```
-
-2. Install dependencies:
-   ```bash
-   bun install
-   ```
-
-3. Build the project:
-   ```bash
-   bun run build
-   ```
-
-### Connecting to Claude Desktop
-
-1. Open your Claude Desktop configuration file:
-   - Mac: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   - Windows: `%AppData%\Claude\claude_desktop_config.json`
-   - Linux: `~/.config/Claude/claude_desktop_config.json`
-
-2. Add the following configuration (update the path to point to your repository):
-   ```json
-   {
-     "mcpServers": {
-       "weather": {
-         "command": "node",
-         "args": [
-           "/absolute/path/to/your/mcp-weather-server/build/index.js"
-         ]
-       }
-     }
-   }
-   ```
-
-   Or Add the following configuration to Cursor:
-   ```json
-
-   {
-     "mcpServers": {
-       "harbor-mcp": {
-         "command": "node",
-         "args": [
-              "/absolute/path/to/your/harbor-mcp-server/build/index.js"
-         ]
-       }
-     }
-   }
-
-   ```
-
-3. Restart Claude Desktop
-
-4. Look for the hammer icon in Claude Desktop, indicating that MCP tools are available
-
-### Testing Your Implementation
-
-Try asking Claude these questions:
-- "What's the weather like in San Francisco right now?"
-- "Are there any weather alerts in Texas today?"
-- "What's the forecast for Chicago this weekend?"
-
-## Project Structure
-
-```
-├── src/
-│   ├── index.ts           # Main server entry point
-│   ├── tools/             # Tool implementations
-│   │   ├── get-forecast.ts
-│   │   └── get-alerts.ts
-│   └── utils/             # Helper functions and API client
-│       └── nws-api.ts
-├── build/                 # Compiled JavaScript files
-├── examples/              # Example code and usage patterns
-├── docs/                  # Additional documentation
-├── package.json
-└── tsconfig.json
+### Install via npm (recommended for CLI/production use)
+```bash
+npm install -g harbor-mcp-server
 ```
 
-## Building Your Own MCP Server
+Or run directly with npx (no install required):
+```bash
+npx harbor-mcp-server
+```
 
-This repository can serve as a template for building your own MCP servers. Follow these steps:
+Or clone and build from source:
+```bash
+git clone https://github.com/bupd/harbor-mcp-server.git
+cd harbor-mcp-server
+npm install
+npm run build
+node build/index.js
+```
 
-1. Fork this repository or create a new one based on its structure
-2. Replace the weather API implementation with your own service
-3. Define your tools by adding new files in the `src/tools` directory
-4. Register your tools in `src/index.ts`
-5. Build and test your implementation
+## Via NPM
 
-For detailed guidance, check out our [step-by-step tutorial](docs/TUTORIAL.md).
+- [harbor-mcp on npm](https://www.npmjs.com/package/harbor-mcp)
 
-## API Information
+## Usage
 
-This server uses the [National Weather Service API](https://www.weather.gov/documentation/services-web-api), which is free to use and doesn't require authentication. Other APIs you might consider integrating include:
+### As an MCP Server for Claude Desktop or Cursor
+Add to your configuration (replace with your actual install path if not using npx):
+```json
+{
+  "mcpServers": {
+    "harbor-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "harbor-mcp"
+      ]
+    }
+  }
+}
+```
+Or, if installed globally:
+```json
+{
+  "mcpServers": {
+    "harbor-mcp": {
+      "command": "harbor-mcp-server",
+      "args": []
+    }
+  }
+}
+```
 
-- Dictionary/Language APIs
-- News and Information APIs
-- Public Data APIs
-- Financial APIs
-
-When selecting APIs for your MCP server, consider:
-- Authentication requirements
-- Rate limits
-- Data format and parsing complexity
-- Update frequency
+### Configuration
+- The default Harbor instance is set to https://demo.goharbor.io. To change, edit `src/config.ts` or set environment variables as needed.
+- Authentication credentials are also set in `src/config.ts`.
 
 ## Troubleshooting
-
-### Common Issues
-
-- **Claude can't find your server**: Verify your configuration path and restart Claude Desktop
-- **API requests failing**: Check your internet connection and API endpoint status
-- **Unexpected responses**: Look at Claude Desktop logs at `~/Library/Logs/Claude/mcp*.log`
+- Ensure your Harbor instance is reachable and credentials are correct.
+- For issues with MCP integration, see the [MCP documentation](https://modelcontextprotocol.io) and check logs for errors.
 
 ## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Please submit a Pull Request or open an issue.
 
 ## License
-
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-Built with ❤️ using the [Model Context Protocol](https://modelcontextprotocol.io) <!-- Replace with actual link -->
-
+Built with ❤️ using the [Model Context Protocol](https://modelcontextprotocol.io)

@@ -1,21 +1,21 @@
 {
   "name": "harbor-mcp",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "build/index.js",
   "type": "module",
   "bin": {
-    "weather": "./build/index.js"
+    "harbor-mcp-server": "./build/index.js"
   },
   "scripts": {
-    "build": "tsc && chmod 755 build/index.js"
+    "build": "tsc"
   },
   "files": [
     "build"
   ],
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "author": "bupd",
+  "license": "MIT",
+  "description": "Harbor MCP Server",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.9.0",
     "zod": "^3.24.2"

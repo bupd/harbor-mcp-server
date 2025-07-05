@@ -1,4 +1,16 @@
-import { harborConfig } from "../config.js";
+/**
+ * Centralized configuration for the Harbor MCP tool.
+ * All values must be set via environment variables.
+ */
+const apiBase = process.env.HARBOR_API_BASE;
+const authUser = process.env.HARBOR_AUTH_USER;
+const authPass = process.env.HARBOR_AUTH_PASS;
+
+if (!apiBase || !authUser || !authPass) {
+  throw new Error(
+    "Missing required Harbor configuration. Please set HARBOR_API_BASE, HARBOR_AUTH_USER, and HARBOR_AUTH_PASS environment variables."
+  );
+}
 
 /**
  * Options for making a request to the Harbor API.
@@ -34,7 +46,7 @@ export async function makeHarborRequest<T>(
   options: HarborRequestOptions = {},
 ): Promise<T | null> {
   const { method = "GET", body, query, needsAuth = true } = options;
-  const baseUrl = `${harborConfig.apiBase}${path}`;
+  const baseUrl = `${apiBase}${path}`;
 
   const url = new URL(baseUrl);
   if (query) {
@@ -51,7 +63,7 @@ export async function makeHarborRequest<T>(
   };
 
   if (needsAuth) {
-    headers.Authorization = createAuthHeader(harborConfig.authUser, harborConfig.authPass);
+    headers.Authorization = createAuthHeader(authUser!, authPass!);
   }
 
   const requestInit: RequestInit = {
