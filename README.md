@@ -23,6 +23,7 @@ The Harbor MCP Server implements the following tools:
 - Project and repository listing
 - Storage quota reporting
 - Registry statistics
+- Search for projects and repositories by name
 
 ## Installation
 

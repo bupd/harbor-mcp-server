@@ -6,6 +6,8 @@ import { registerGetStatisticsTool } from "./tools/statistics.js";
 import { registerListProjectsTool } from "./tools/projects.js";
 import { registerListRepositoriesTool } from "./tools/repositories.js";
 import { registerListQuotasTool } from "./tools/quotas.js";
+import { registerSearchTool } from "./tools/search.js";
+import { registerGetConfigurationsTool } from "./tools/configurations.js";
 
 /**
  * The main function to initialize and run the MCP server.
@@ -19,6 +21,8 @@ async function main() {
   registerListProjectsTool();
   registerListRepositoriesTool();
   registerListQuotasTool();
+  registerSearchTool();
+  registerGetConfigurationsTool();
   console.error("All tools registered.");
 
   // Connect the server to a transport
