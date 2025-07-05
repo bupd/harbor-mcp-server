@@ -6,12 +6,10 @@ import {
   registerSearchLdapGroupTool,
 } from "./tools/ldap.js";
 import { registerGetHealthTool } from "./tools/health.js";
-import { registerPingTool } from "./tools/ping.js";
 import { registerGetStatisticsTool } from "./tools/statistics.js";
 import {
   registerListProjectsTool,
   registerGetProjectTool,
-  registerGetProjectDeletableTool,
   registerGetProjectSummaryTool,
   registerListProjectMembersTool,
 } from "./tools/projects.js";
@@ -41,11 +39,9 @@ async function main() {
   // Register all available tools with the server.
   console.error("Registering Harbor tools...");
   registerGetHealthTool();
-  registerPingTool();
   registerGetStatisticsTool();
   registerListProjectsTool();
   registerGetProjectTool();
-  registerGetProjectDeletableTool();
   registerGetProjectSummaryTool();
   registerListProjectMembersTool();
   registerListRepositoriesTool();
