@@ -13,7 +13,6 @@ import { registerListRepositoriesTool } from "./tools/repositories.js";
 import { registerListQuotasTool } from "./tools/quotas.js";
 import { registerSearchTool } from "./tools/search.js";
 import { registerGetConfigurationsTool } from "./tools/configurations.js";
-import { registerGetSystemInfoTool } from "./tools/systeminfo.js";
 import { registerGetVolumesTool } from "./tools/volumes.js";
 import { registerGetWorkerPoolsTool } from "./tools/workerpools.js";
 import { registerGetWorkersTool } from "./tools/workers.js";
@@ -44,7 +43,6 @@ async function main() {
   registerListQuotasTool();
   registerSearchTool();
   registerGetConfigurationsTool();
-  registerGetSystemInfoTool();
   registerGetVolumesTool();
   registerGetWorkerPoolsTool();
   registerGetWorkersTool();
