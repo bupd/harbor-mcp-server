@@ -8,7 +8,7 @@ const authPass = process.env.HARBOR_AUTH_PASS;
 
 if (!apiBase || !authUser || !authPass) {
   throw new Error(
-    "Missing required Harbor configuration. Please set HARBOR_API_BASE, HARBOR_AUTH_USER, and HARBOR_AUTH_PASS environment variables."
+    "Missing required Harbor configuration. Please set HARBOR_API_BASE, HARBOR_AUTH_USER, and HARBOR_AUTH_PASS environment variables.",
   );
 }
 
