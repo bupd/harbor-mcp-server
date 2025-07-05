@@ -1,4 +1,11 @@
-# Harbor-MCP (Community Experimental)
+<h1 align="center" style="font-weight: bold;">Harbor MCP Server (Experimental 🧪)</h1>
+
+![NPM Version](https://img.shields.io/npm/v/harbor-mcp)
+![GitHub License](https://img.shields.io/github/license/bupd/harbor-mcp-server)
+![Docker Pulls](https://img.shields.io/docker/pulls/bupd/harbor-mcp)
+[![Hits](https://hits.sh/github.com/bupd/harbor-mcp-server.svg?label=views&extraCount=100&color=007ec6)](https://hits.sh/github.com/bupd/harbor-mcp-server/)
+
+
 
 **This is an experimental, community-driven MCP server for Harbor. It is _not_ an official Harbor project.**  
 We welcome and rely on community contributions—join us to improve and expand this tool!
@@ -139,6 +146,3 @@ It is experimental and under active development by the community.
 - [Docker Hub Image](https://hub.docker.com/r/bupd/harbor-mcp)
 - [Official Harbor Project](https://goharbor.io)
 
----
-
-[![Hits](https://hits.sh/github.com/bupd/harbor-mcp-server.svg?label=views&extraCount=100&color=007ec6)](https://hits.sh/github.com/bupd/harbor-mcp-server/)
