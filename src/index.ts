@@ -14,8 +14,6 @@ import { registerListQuotasTool } from "./tools/quotas.js";
 import { registerSearchTool } from "./tools/search.js";
 import { registerGetConfigurationsTool } from "./tools/configurations.js";
 import { registerGetVolumesTool } from "./tools/volumes.js";
-import { registerGetWorkerPoolsTool } from "./tools/workerpools.js";
-import { registerGetWorkersTool } from "./tools/workers.js";
 import { registerListJobQueuesTool } from "./tools/jobqueues.js";
 import { registerListSchedulesTool } from "./tools/schedules.js";
 import { registerGetSchedulePausedTool } from "./tools/schedulepaused.js";
@@ -44,8 +42,6 @@ async function main() {
   registerSearchTool();
   registerGetConfigurationsTool();
   registerGetVolumesTool();
-  registerGetWorkerPoolsTool();
-  registerGetWorkersTool();
   registerListJobQueuesTool();
   registerListSchedulesTool();
   registerGetSchedulePausedTool();
