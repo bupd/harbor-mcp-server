@@ -71,7 +71,28 @@ A Model Context Protocol (MCP) server for Harbor, enabling AI models and tools t
 }
 ```
 
-## For Usage in Docker Coming Soon.
+## Run with Docker
+```json
+"mcpServers": {
+  "harbor-mcp": {
+    "command": "docker",
+    "args": [
+      "run",
+      "-i",
+      "--rm",
+      "-e", "HARBOR_API_BASE",
+      "-e", "HARBOR_AUTH_USER",
+      "-e", "HARBOR_AUTH_PASS",
+      "bupd/harbor-mcp-server:latest"
+    ],
+    "env": {
+      "HARBOR_API_BASE": "YOUR_HARBOR_URL",
+      "HARBOR_AUTH_USER": "YOUR_HARBOR_USERNAME",
+      "HARBOR_AUTH_PASS": "YOUR_HARBOR_PASSWORD_OR_SECRET"
+    }
+  }
+}
+```
 
 ---
 
