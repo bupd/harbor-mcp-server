@@ -32,7 +32,6 @@ import { registerListRetentionTasksTool } from "./tools/retentiontasks.js";
 import { registerGetRetentionTaskLogTool } from "./tools/retentiontasklog.js";
 import { registerGetScannerTool } from "./tools/scanner.js";
 import { registerGetScannerMetadataTool } from "./tools/scannermetadata.js";
-import { registerGetCertTool } from "./tools/cert.js";
 import { registerGetJobLogTool } from "./tools/joblog.js";
 
 /**
@@ -68,7 +67,6 @@ async function main() {
   registerGetRetentionTaskLogTool();
   registerGetScannerTool();
   registerGetScannerMetadataTool();
-  registerGetCertTool();
   registerGetJobLogTool();
   registerGetPermissionsTool();
   console.error("All tools registered.");
