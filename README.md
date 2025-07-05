@@ -18,6 +18,16 @@ A Model Context Protocol (MCP) server for Harbor, enabling AI models and tools t
 
 ---
 
+## Project Links
+
+[![Static Badge](https://img.shields.io/badge/_-black?logo=github&logoSize=small) GitHub Repository](https://github.com/bupd/harbor-mcp-server)
+  
+[![Static Badge](https://img.shields.io/badge/_-red?logo=npm&logoSize=small) Harbor-MCP on NPM](https://www.npmjs.com/package/harbor-mcp)
+  
+[![Static Badge](https://img.shields.io/badge/_-white?logo=docker) Docker Hub Image ](https://hub.docker.com/r/bupd/harbor-mcp)
+
+[![Static Badge](https://img.shields.io/badge/_-black?logo=harbor&logoColor=white&logoSize=small) Official Harbor Project](https://goharbor.io)
+
 ## Quick Start
 
 1. **Clone & Install:**
@@ -139,10 +149,4 @@ It is experimental and under active development by the community.
 
 ---
 
-## Project Links
-
-- [GitHub Repository](https://github.com/bupd/harbor-mcp-server)
-- [harbor-mcp on npm](https://www.npmjs.com/package/harbor-mcp)
-- [Docker Hub Image](https://hub.docker.com/r/bupd/harbor-mcp)
-- [Official Harbor Project](https://goharbor.io)
 
