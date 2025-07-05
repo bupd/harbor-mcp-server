@@ -1,4 +1,4 @@
-# harbor-mcp (Community Experimental)
+# Harbor-MCP (Community Experimental)
 
 **This is an experimental, community-driven MCP server for Harbor. It is _not_ an official Harbor project.**  
 We welcome and rely on community contributions—join us to improve and expand this tool!
