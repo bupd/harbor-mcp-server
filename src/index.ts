@@ -13,7 +13,6 @@ import { registerListQuotasTool } from "./tools/quotas.js";
 import { registerSearchTool } from "./tools/search.js";
 import { registerGetConfigurationsTool } from "./tools/configurations.js";
 import { registerGetVolumesTool } from "./tools/volumes.js";
-import { registerGetScannerMetadataTool } from "./tools/scannermetadata.js";
 
 /**
  * The main function to initialize and run the MCP server.
@@ -32,7 +31,6 @@ async function main() {
   registerSearchTool();
   registerGetConfigurationsTool();
   registerGetVolumesTool();
-  registerGetScannerMetadataTool();
   console.error("All tools registered.");
 
   // Connect the server to a transport
