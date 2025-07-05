@@ -66,7 +66,12 @@ Add to your configuration (replace with your actual install path if not using np
       "args": [
         "-y",
         "harbor-mcp"
-      ]
+      ],
+      "env": {
+        "HARBOR_API_BASE": "https://demo.goharbor.io/api/v2.0",
+        "HARBOR_AUTH_USER": "harbor-cli",
+        "HARBOR_AUTH_PASS": "Harbor12345"
+      }
     }
   }
 }
@@ -77,7 +82,12 @@ Or, if installed globally:
   "mcpServers": {
     "harbor-mcp": {
       "command": "harbor-mcp-server",
-      "args": []
+      "args": [],
+      "env": {
+        "HARBOR_API_BASE": "https://demo.goharbor.io/api/v2.0",
+        "HARBOR_AUTH_USER": "harbor-cli",
+        "HARBOR_AUTH_PASS": "Harbor12345"
+      }
     }
   }
 }
@@ -91,8 +101,61 @@ Or, if installed globally:
 - Ensure your Harbor instance is reachable and credentials are correct.
 - For issues with MCP integration, see the [MCP documentation](https://modelcontextprotocol.io) and check logs for errors.
 
-## Contributing
-Contributions are welcome! Please submit a Pull Request or open an issue.
+## Contributing & Local Development
+
+We welcome contributions! Here’s how to set up and use the Harbor MCP server for local development:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/bupd/harbor-mcp-server.git
+cd harbor-mcp-server
+```
+
+### 2. Install Dependencies & Build
+
+You can use either `bun` or `npm`:
+
+- With npm:
+  ```bash
+  npm install
+  npm run build
+  ```
+- With bun:
+  ```bash
+  bun install
+  bun run build
+  ```
+
+### 3. Configure Your MCP Client (e.g., Claude Desktop, Cursor)
+
+Add the following to your `mcp.json` to use your local build for development:
+
+```json
+{
+  "harbor": {
+    "command": "node",
+    "args": [
+      "/home/bupd/code/pp/harbor-mcp-server/build/index.js"
+    ],
+    "env": {
+      "HARBOR_API_BASE": "https://demo.goharbor.io/api/v2.0",
+      "HARBOR_AUTH_USER": "harbor-cli",
+      "HARBOR_AUTH_PASS": "Harbor12345"
+    }
+  }
+}
+```
+
+**Tip:** Adjust the `args` path if your local path is different.
+
+### 4. Start Your MCP Client
+
+Your MCP client will now use your local Harbor MCP server for all Harbor-related tools and endpoints.
+
+---
+
+For questions, issues, or to submit a pull request, please open an issue or PR on GitHub!
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
