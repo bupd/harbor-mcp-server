@@ -13,7 +13,6 @@ import { registerListQuotasTool } from "./tools/quotas.js";
 import { registerSearchTool } from "./tools/search.js";
 import { registerGetConfigurationsTool } from "./tools/configurations.js";
 import { registerGetVolumesTool } from "./tools/volumes.js";
-import { registerGetScannerTool } from "./tools/scanner.js";
 import { registerGetScannerMetadataTool } from "./tools/scannermetadata.js";
 
 /**
@@ -33,7 +32,6 @@ async function main() {
   registerSearchTool();
   registerGetConfigurationsTool();
   registerGetVolumesTool();
-  registerGetScannerTool();
   registerGetScannerMetadataTool();
   console.error("All tools registered.");
 
