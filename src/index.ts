@@ -1,10 +1,6 @@
 import { registerGetPermissionsTool } from "./tools/permissions.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { server } from "./mcp-server.js";
-import {
-  registerSearchLdapUserTool,
-  registerSearchLdapGroupTool,
-} from "./tools/ldap.js";
 import { registerGetHealthTool } from "./tools/health.js";
 import { registerGetStatisticsTool } from "./tools/statistics.js";
 import {
@@ -48,8 +44,6 @@ async function main() {
   registerListQuotasTool();
   registerSearchTool();
   registerGetConfigurationsTool();
-  registerSearchLdapUserTool();
-  registerSearchLdapGroupTool();
   registerGetSystemInfoTool();
   registerGetVolumesTool();
   registerGetWorkerPoolsTool();
