@@ -51,8 +51,7 @@ export function registerSearchTool() {
         output += data.project
           .map(
             (p) =>
-              `- **${p.name}** (ID: ${p.project_id}, Public: ${p.public}, Repos: ${p.repo_count}$
-{p.owner_name ? ", Owner: " + p.owner_name : ""})`
+              `- **${p.name}** (ID: ${p.project_id}, Public: ${p.public}, Repos: ${p.repo_count}${p.owner_name ? ", Owner: " + p.owner_name : ""})`
           )
           .join("\n");
         output += "\n\n";
@@ -75,4 +74,4 @@ export function registerSearchTool() {
       return { content: [{ type: "text", text: output }] };
     }
   );
-} 
+}

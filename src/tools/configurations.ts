@@ -30,14 +30,19 @@ export function registerGetConfigurationsTool() {
       if (!data) {
         return {
           content: [
-            { type: "text", text: "Failed to retrieve system configurations. You may need admin permissions or be logged in." },
+            {
+              type: "text",
+              text: "Failed to retrieve system configurations. You may need admin permissions or be logged in.",
+            },
           ],
         };
       }
 
       const keys = Object.keys(data);
       if (keys.length === 0) {
-        return { content: [{ type: "text", text: "No system configurations found." }] };
+        return {
+          content: [{ type: "text", text: "No system configurations found." }],
+        };
       }
 
       const configList = keys
@@ -101,4 +106,4 @@ export function registerGetConfigurationsTool() {
       }
     }
   );
-} 
+}
