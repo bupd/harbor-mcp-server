@@ -21,4 +21,4 @@ ENV HARBOR_AUTH_USER=""
 ENV HARBOR_AUTH_PASS=""
 
 # Default command
-CMD ["node", "build/index.js"]
+CMD ["node", "/app/build/index.js"]
