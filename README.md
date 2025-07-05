@@ -1,165 +1,110 @@
-# harbor-mcp
+# harbor-mcp (Community Experimental)
 
-A Model Context Protocol (MCP) server for Harbor, enabling AI models and external tools to interact with a Harbor container registry in real time.
+**This is an experimental, community-driven MCP server for Harbor. It is _not_ an official Harbor project.**  
+We welcome and rely on community contributions—join us to improve and expand this tool!
 
-## What is MCP?
+---
 
-Model Context Protocol (MCP) is an open communication framework that allows AI models (like Claude) to interact with external tools and APIs. This enables access to real-time data, process automation, and integration with external services.
+## What is this?
 
-Learn more about MCP:
-- [MCP Official Documentation](https://modelcontextprotocol.io)
-- [Getting Started with MCP](https://modelcontextprotocol.io/quickstart/server)
-- [Postmans MCP Developer Community](https://discord.gg/kTnA7cpn)
+A Model Context Protocol (MCP) server for Harbor, enabling AI models and tools to interact with a Harbor container registry in real time.
 
-## What This Repository Contains
+---
 
-- **Complete MCP Server for Harbor**: A ready-to-use implementation that gives MCP clients access to Harbor registry data and management endpoints.
-- **Configuration Examples**: Sample configuration for connecting to Claude Desktop or other MCP clients.
+## Quick Start
 
-## Features
+1. **Clone & Install:**
+   ```bash
+   git clone https://github.com/bupd/harbor-mcp-server.git
+   cd harbor-mcp-server
+   bun install
+   bun run build
+   ```
 
-The Harbor MCP Server implements the following tools:
-- Health and liveness checks for the Harbor instance
-- Project and repository listing
-- Storage quota reporting
-- Registry statistics
-- Search for projects and repositories by name
+2. **Set Environment Variables:**
+   - export HARBOR_API_BASE=YOUR_HARBOR_URL (e.g. `https://demo.goharbor.io/api/v2.0`)
+   - export HARBOR_AUTH_USER=YOUR_USERNAME
+   - export HARBOR_AUTH_PASS=YOUR_PASSWORD (or token or secret or whatever you call it)
 
-## Installation
+3. **Run:**
+   ```bash
+   node build/index.js
+   ```
 
-### Prerequisites
-- Node.js 16+ and npm
-- Access to a Harbor instance
+4. **Integrate with your MCP client** (e.g. Claude Desktop, Cursor) using the appropriate command and environment variables.
 
-### Install via npm (recommended for CLI/production use)
-```bash
-npm install -g harbor-mcp-server
-```
-
-Or run directly with npx (no install required):
-```bash
-npx harbor-mcp-server
-```
-
-Or clone and build from source:
-```bash
-git clone https://github.com/bupd/harbor-mcp-server.git
-cd harbor-mcp-server
-npm install
-npm run build
-node build/index.js
-```
-
-## Via NPM
-
-- [harbor-mcp on npm](https://www.npmjs.com/package/harbor-mcp)
-
-## Usage
-
-### As an MCP Server for Claude Desktop or Cursor
-Add to your configuration (replace with your actual install path if not using npx):
 ```json
 {
   "mcpServers": {
-    "harbor-mcp": {
+    "harbor": {
       "command": "npx",
       "args": [
         "-y",
         "harbor-mcp"
-      ],
+      ],  
       "env": {
-        "HARBOR_API_BASE": "https://demo.goharbor.io/api/v2.0",
-        "HARBOR_AUTH_USER": "harbor-cli",
-        "HARBOR_AUTH_PASS": "Harbor12345"
+        "HARBOR_API_BASE": "HARBOR_URL",
+        "HARBOR_AUTH_USER": "HARBOR_USERNAME",
+        "HARBOR_AUTH_PASS": "HARBOR_PASSWORD_OR_SECRET"
       }
     }
   }
 }
 ```
-Or, if installed globally:
+
+#### If you have it locally use the below
 ```json
 {
   "mcpServers": {
-    "harbor-mcp": {
-      "command": "harbor-mcp-server",
-      "args": [],
+    "harbor": {
+      "command": "node",
+      "args": [
+        "YOUR_ABSOLUTE_PATH/harbor-mcp-server/build/index.js"
+      ],
       "env": {
-        "HARBOR_API_BASE": "https://demo.goharbor.io/api/v2.0",
-        "HARBOR_AUTH_USER": "harbor-cli",
-        "HARBOR_AUTH_PASS": "Harbor12345"
+        "HARBOR_API_BASE": "HARBOR_URL",
+        "HARBOR_AUTH_USER": "HARBOR_USERNAME",
+        "HARBOR_AUTH_PASS": "HARBOR_PASSWORD_OR_SECRET"
       }
     }
   }
 }
 ```
 
-### Configuration
-- The default Harbor instance is set to https://demo.goharbor.io. To change, edit `src/config.ts` or set environment variables as needed.
-- Authentication credentials are also set in `src/config.ts`.
-
-## Troubleshooting
-- Ensure your Harbor instance is reachable and credentials are correct.
-- For issues with MCP integration, see the [MCP documentation](https://modelcontextprotocol.io) and check logs for errors.
-
-## Contributing & Local Development
-
-We welcome contributions! Here’s how to set up and use the Harbor MCP server for local development:
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/bupd/harbor-mcp-server.git
-cd harbor-mcp-server
-```
-
-### 2. Install Dependencies & Build
-
-You can use either `bun` or `npm`:
-
-- With npm:
-  ```bash
-  npm install
-  npm run build
-  ```
-- With bun:
-  ```bash
-  bun install
-  bun run build
-  ```
-
-### 3. Configure Your MCP Client (e.g., Claude Desktop, Cursor)
-
-Add the following to your `mcp.json` to use your local build for development:
-
-```json
-{
-  "harbor": {
-    "command": "node",
-    "args": [
-      "/home/bupd/code/pp/harbor-mcp-server/build/index.js"
-    ],
-    "env": {
-      "HARBOR_API_BASE": "https://demo.goharbor.io/api/v2.0",
-      "HARBOR_AUTH_USER": "harbor-cli",
-      "HARBOR_AUTH_PASS": "Harbor12345"
-    }
-  }
-}
-```
-
-**Tip:** Adjust the `args` path if your local path is different.
-
-### 4. Start Your MCP Client
-
-Your MCP client will now use your local Harbor MCP server for all Harbor-related tools and endpoints.
+## For Usage in Docker Coming Soon.
 
 ---
 
-For questions, issues, or to submit a pull request, please open an issue or PR on GitHub!
+## Features / Commands
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The following Harbor operations are available as MCP tools:
+
+- `get-health`: Check Harbor instance health.
+- `get-statistics`: Get project and repository statistics.
+- `list-projects`: List projects (with filters/pagination).
+- `get-project`: Get details for a specific project.
+- `get-project-summary`: Get a summary of a project.
+- `list-project-members`: List members of a project.
+- `list-repositories-in-project`: List repositories in a project.
+- `list-quotas`: List storage quotas for projects.
+- `search`: Search for projects and repositories by name.
+- `get-configurations`: Get system configurations (admin only).
+- `update-configurations`: Update system configurations (admin only, confirmation required).
+- `get-volumes`: Get system volume info (total/free size).
 
 ---
 
-Built with ❤️ using the [Model Context Protocol](https://modelcontextprotocol.io)
+## Contributing
+
+- This project is maintained by the community, for the community.
+- We are looking for contributors!  
+- Open an issue or PR to get involved.
+
+For more details look at (CONTRIBUTING.md)[CONTRIBUTING.md]
+
+---
+
+## Disclaimer
+
+This is **not** an official Harbor MCP server.  
+It is experimental and under active development by the community.
