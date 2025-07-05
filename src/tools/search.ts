@@ -40,7 +40,10 @@ export function registerSearchTool() {
       if (!data) {
         return {
           content: [
-            { type: "text", text: "Failed to retrieve search results from Harbor." },
+            {
+              type: "text",
+              text: "Failed to retrieve search results from Harbor.",
+            },
           ],
         };
       }
@@ -51,7 +54,7 @@ export function registerSearchTool() {
         output += data.project
           .map(
             (p) =>
-              `- **${p.name}** (ID: ${p.project_id}, Public: ${p.public}, Repos: ${p.repo_count}${p.owner_name ? ", Owner: " + p.owner_name : ""})`
+              `- **${p.name}** (ID: ${p.project_id}, Public: ${p.public}, Repos: ${p.repo_count}${p.owner_name ? ", Owner: " + p.owner_name : ""})`,
           )
           .join("\n");
         output += "\n\n";
@@ -62,9 +65,11 @@ export function registerSearchTool() {
           .map(
             (r) =>
               `- **${r.repository_name}** (Project: ${r.project_name}` +
-              (r.artifact_count !== undefined ? `, Artifacts: ${r.artifact_count}` : "") +
+              (r.artifact_count !== undefined
+                ? `, Artifacts: ${r.artifact_count}`
+                : "") +
               (r.pull_count !== undefined ? `, Pulls: ${r.pull_count}` : "") +
-              ")"
+              ")",
           )
           .join("\n");
       }
@@ -72,6 +77,6 @@ export function registerSearchTool() {
         output = "No projects or repositories found matching the search query.";
       }
       return { content: [{ type: "text", text: output }] };
-    }
+    },
   );
 }
