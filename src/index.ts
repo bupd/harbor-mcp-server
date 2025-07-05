@@ -1,7 +1,6 @@
 import { registerGetPermissionsTool } from "./tools/permissions.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { server } from "./mcp-server.js";
-import { registerGetInternalConfigTool } from "./tools/internalconfig.js";
 import {
   registerSearchLdapUserTool,
   registerSearchLdapGroupTool,
@@ -56,7 +55,6 @@ async function main() {
   registerGetConfigurationsTool();
   registerSearchLdapUserTool();
   registerSearchLdapGroupTool();
-  registerGetInternalConfigTool();
   registerGetSystemInfoTool();
   registerGetVolumesTool();
   registerGetWorkerPoolsTool();
