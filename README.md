@@ -40,8 +40,14 @@ A Model Context Protocol (MCP) server for Harbor, enabling AI models and tools t
 
 2. **Set Environment Variables:**
    - export HARBOR_API_BASE=YOUR_HARBOR_URL (e.g. `https://demo.goharbor.io/api/v2.0`)
-   - export HARBOR_AUTH_USER=YOUR_USERNAME
-   - export HARBOR_AUTH_PASS=YOUR_PASSWORD (or token or secret or whatever you call it)
+   - export HARBOR_AUTH_USER=YOUR_USERNAME _(optional)_
+   - export HARBOR_AUTH_PASS=YOUR_PASSWORD _(or token or secret or whatever you call it; optional)_
+
+   **Anonymous access:** `HARBOR_API_BASE` is the only required variable.
+   If `HARBOR_AUTH_USER`/`HARBOR_AUTH_PASS` are not set, requests are sent
+   without an `Authorization` header, which works against Harbor instances
+   that serve public projects anonymously. Set them only when you need
+   access to private projects.
 
 3. **Run:**
    ```bash
