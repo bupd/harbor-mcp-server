@@ -1,14 +1,18 @@
 /**
  * Centralized configuration for the Harbor MCP tool.
- * All values must be set via environment variables.
+ * `HARBOR_API_BASE` must be set via environment variables.
+ * `HARBOR_AUTH_USER` and `HARBOR_AUTH_PASS` are optional:
+ * when they are not set, requests are made anonymously,
+ * which works against Harbor instances that expose public projects
+ * without authentication.
  */
 const apiBase = process.env.HARBOR_API_BASE;
 const authUser = process.env.HARBOR_AUTH_USER;
 const authPass = process.env.HARBOR_AUTH_PASS;
 
-if (!apiBase || !authUser || !authPass) {
+if (!apiBase) {
   throw new Error(
-    "Missing required Harbor configuration. Please set HARBOR_API_BASE, HARBOR_AUTH_USER, and HARBOR_AUTH_PASS environment variables.",
+    "Missing required Harbor configuration. Please set the HARBOR_API_BASE environment variable.",
   );
 }
 
@@ -62,8 +66,10 @@ export async function makeHarborRequest<T>(
     Accept: needsAuth ? "application/json" : "text/plain",
   };
 
-  if (needsAuth) {
-    headers.Authorization = createAuthHeader(authUser!, authPass!);
+  // Send an `Authorization` header only when credentials are configured;
+  // otherwise the request is made anonymously.
+  if (needsAuth && authUser && authPass) {
+    headers.Authorization = createAuthHeader(authUser, authPass);
   }
 
   const requestInit: RequestInit = {
